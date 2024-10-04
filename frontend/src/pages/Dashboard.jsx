@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Appbar } from "../components/Appbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Users } from "../components/User";
-
+import { MyContext } from "../components/UserContext";
 export const Dashboard = () => {
   const [balance, setBalance] = useState(null);
-  const [name,setName] = useState('')
+  const {name,setName} = useContext(MyContext)
   const navigate = useNavigate();
-
+  console.log(name)
   useEffect(() => {
     const fetchBalance = async () => {
       try {
@@ -23,23 +23,9 @@ export const Dashboard = () => {
       }
     };
 
-    const fetchDetails = async function (){
-      try{
-        const details = await axios.get("http://localhost:3000/api/v1/user/details",{
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token")
-          }
-        })
-        const firstName = details.data.firstName[0].toUpperCase() + details.data.firstName.slice(1).toLowerCase();
-        const lastName  = details.data.lastName[0].toUpperCase() + details.data.lastName.slice(1).toLowerCase();
-        setName(firstName + " " + lastName);
-      } catch(e){
-        console.log('error fetchhing details',e)
-      }
-    }
-
+    
     fetchBalance();
-    fetchDetails();
+   
   }, []);
 
   return (
