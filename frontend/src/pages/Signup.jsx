@@ -8,19 +8,23 @@ import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { set } from "mongoose";
 
 export const Signup = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error,setError] = useState(false)
     const navigate = useNavigate();
 
     const handleSignUp = async () => {
         try {
             await axios.post("http://localhost:3000/api/v1/user/signup", { username, firstName, lastName, password });
+            setError(false)
             navigate("/signin");
         } catch (err) {
+            setError(true)
             console.error("Sign up failed", err);
         }
     };
@@ -38,6 +42,8 @@ export const Signup = () => {
                     <div className="pt-4">
                         <Button onClick={handleSignUp} label={"Sign up"} />
                     </div>
+                    {error?(<div className="text-red-800
+                    ">Invalid Inputs</div>):("")}
                     <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
                 </div>
             </div>

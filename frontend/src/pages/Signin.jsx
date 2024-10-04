@@ -19,7 +19,7 @@ export const Signin = () => {
         try {
             const response = await axios.post("http://localhost:3000/api/v1/user/signin", { username, password });
             localStorage.setItem("token", response.data.token);
-            navigate("/dashboard");
+            navigate("/");
         } catch (err) {
             setError("Sign in failed. Please check your credentials.");
         }

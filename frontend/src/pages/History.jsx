@@ -52,14 +52,17 @@ function TransactionItem({ transaction }) {
           </div>
         </div>
         <div className="flex flex-col justify-center h-full">
-          <div>From: {transaction.from[0].toUpperCase()}{transaction.from.slice(1)}</div>
+          <div>
+            From: {transaction.from.split(' ').map((word) => (
+              word[0].toUpperCase() + word.slice(1)
+            )).join(' ')}
+          </div>
           <div>To: {transaction.to[0].toUpperCase()}{transaction.to.slice(1)}</div>
           <div>Amount: ₹{transaction.amount}</div>
         </div>
       </div>
-      
     </div>
   );
 }
 
-export default History;
+export default History

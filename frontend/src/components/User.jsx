@@ -12,10 +12,19 @@ export const Users = () => {
     useEffect(() => {
         axios.get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
             .then(response => {
-                setUsers(response.data.user)
+                
+                const filteredUsers = response.data.user.filter(user => user._id !== getCurrentUserId()); // Adjust this logic based on your actual user data structure
+                setUsers(filteredUsers);
             })
-    }, [filter])
+            .catch(error => {
+                console.error('Error fetching users', error);
+            });
+    }, [filter]);
 
+    const getCurrentUserId = () => {
+
+        return localStorage.getItem("userId");
+    };
     return <>
         <div className="font-bold mt-6 text-lg">
             Users
@@ -38,7 +47,7 @@ function User({user}) {
         <div className="flex">
             <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center mt-1 mr-2">
                 <div className="flex flex-col justify-center h-full text-xl">
-                    {user.firstName[0]}{user.lastName[0]}
+                    {user.firstName[0].toUpperCase()}{user.lastName[0].toUpperCase()}
                 </div>
             </div>
             <div className="flex flex-col justify-center h-ful">

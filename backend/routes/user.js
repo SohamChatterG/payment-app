@@ -153,16 +153,30 @@ router.get('/history', authMiddleware, async (req, res) => {
         });
     }
 
-    // res.json({
-    //     user: users.map(user => ({
-    //         username: user.username,
-    //         firstName: user.firstName,
-    //         lastName: user.lastName,
-    //         _id: user._id
-    //     }))
-    // })
+    
 });
+
+router.get('/details',authMiddleware,async (req,res)=>{
+    const id = req.userId || -1;
+    if(id == -1){
+        return res.status(507).json({mg: 'userId not assigned id'})
+    }
+    try{
+        const userDetails = await User.findOne({_id : id});
+        if(!userDetails){
+            return res.status(508).json({mg: 'userId not assigned'})
+        }
+        res.status(207).json({
+            username : userDetails.username,
+            firstName : userDetails.firstName,
+            lastName : userDetails.lastName
+
+        })
+    } catch(e){
+        console.log('error from details route',e)
+    }
+
+})
   
 module.exports = router
 
-// https://daily-code-web.vercel.app/tracks/43XrfL4n0LgSnTkSB4rO/QDisg3v6Fo9r08H6NsSd

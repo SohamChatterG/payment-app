@@ -8,6 +8,7 @@ import { Signin } from "./pages/Signin";
 import { Dashboard } from "./pages/Dashboard";
 import { SendMoney } from "./pages/SendMoney";
 import History from "./pages/History";
+import AuthRoute from "./components/AuthRoute";
 function App() {
   return (
     <>
@@ -17,9 +18,17 @@ function App() {
         <Routes>
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/send" element={<SendMoney />} />
-          <Route path="/history" element={<History />} />
+          <Route path="/" element={
+            <AuthRoute>
+              <Dashboard />
+            </AuthRoute>
+          } />
+          <Route path="/send" element={<AuthRoute> <SendMoney /></AuthRoute>} />
+          <Route path="/history" element={
+            <AuthRoute>
+              <History />
+            </AuthRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </>
