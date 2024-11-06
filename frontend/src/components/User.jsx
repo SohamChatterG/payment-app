@@ -44,8 +44,13 @@ export const Users = () => {
                 />
             </div>
             <div>
-                {users.map(user => <User key={user._id} user={user} />)} {/* Add a key prop */}
+                {users.length === 0 ? (
+                    <div>No users found.</div>
+                ) : (
+                    users.map(user => <User key={user._id} user={user} />)
+                )}
             </div>
+
         </>
     );
 };

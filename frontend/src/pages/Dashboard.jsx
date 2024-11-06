@@ -6,7 +6,7 @@ import { Users } from "../components/User";
 import { MyContext } from "../components/UserContext";
 export const Dashboard = () => {
   const [balance, setBalance] = useState(null);
-  const {name,setName} = useContext(MyContext)
+  // const {name} = useContext(MyContext)
   const navigate = useNavigate();
   console.log(name)
   useEffect(() => {

@@ -42,8 +42,7 @@ export const Signup = () => {
                     <div className="pt-4">
                         <Button onClick={handleSignUp} label={"Sign up"} />
                     </div>
-                    {error?(<div className="text-red-800
-                    ">Invalid Inputs</div>):("")}
+                    {error?(<div className="text-red-800">Invalid Inputs</div>):("")}
                     <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
                 </div>
             </div>

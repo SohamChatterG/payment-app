@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
-
-mongoose.connect('mongodb://localhost:27017/paytm',{
+//
+mongoose.connect('mongodb://localhost:27017/paytm', {
     serverSelectionTimeoutMS: 5000,
 })
-.then((res,rej)=>console.log('database connected'))
-.catch((e)=>console.log('error in connecting to the database',e))
+.then(() => console.log('database connected'))
+.catch((e) => console.log('error in connecting to the database', e));
 
 const userSchema = new mongoose.Schema({
     username : {
